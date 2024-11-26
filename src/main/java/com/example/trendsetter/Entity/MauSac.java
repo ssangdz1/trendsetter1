@@ -22,4 +22,8 @@ public class MauSac {
 
     @Column(name = "trang_thai")
     private String trangThai;
+
+    @ManyToOne
+    @JoinColumn(name = "id_san_pham_chi_tiet",referencedColumnName = "id")
+    private SanPhamChiTiet sanPhamChiTiet;
 }

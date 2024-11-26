@@ -28,6 +28,7 @@
             <th>ID</th>
             <th>Tên Màu Sắc</th>
             <th>Trạng Thái</th>
+            <th>ID SPCT</th>
             <th>Chức Năng</th>
         </tr>
         </thead>
@@ -37,6 +38,7 @@
                 <td>${mauSac.id}</td>
                 <td>${mauSac.tenMauSac}</td>
                 <td>${mauSac.trangThai}</td>
+                <td>${mauSac.sanPhamChiTiet.id}</td>
                 <td>
                     <!-- Nút sửa (mở modal) -->
                     <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#suaModal-${mauSac.id}">

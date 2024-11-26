@@ -28,6 +28,7 @@
             <th>ID</th>
             <th>Tên Kích Thước</th>
             <th>Trạng Thái</th>
+            <th>ID SPCT</th>
             <th>Chức Năng</th>
         </tr>
         </thead>
@@ -37,6 +38,7 @@
                 <td>${kichThuoc.id}</td>
                 <td>${kichThuoc.tenKichThuoc}</td>
                 <td>${kichThuoc.trangThai}</td>
+                <td>${kichThuoc.sanPhamChiTiet}</td>
                 <td>
                     <!-- Nút sửa (mở modal) -->
                     <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#suaModal-${kichThuoc.id}">

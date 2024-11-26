@@ -1,6 +1,7 @@
 package com.example.trendsetter.Entity;
 
 import jakarta.persistence.*;
+import jakarta.persistence.criteria.CriteriaBuilder;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,9 +18,6 @@ public class DiaChi {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "ten_duong")
-    private String tenDuong;
-
     @Column(name = "so_nha")
     private Integer soNha;
 
@@ -35,4 +33,7 @@ public class DiaChi {
     @Column(name = "trang_thai")
     private String trangThai;
 
+    @ManyToOne
+    @JoinColumn(name = "id_khach_hang",referencedColumnName = "id")
+    private KhachHang khachHang;
 }

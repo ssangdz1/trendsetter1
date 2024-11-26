@@ -28,7 +28,7 @@
             <th>Id</th>
             <th>Tên Chất Liệu</th>
             <th>Mô Tả</th>
-            <th>Trạng Thái</th>
+            <th>Id SPCT</th>
             <th>Chức Năng</th>
         </tr>
         </thead>
@@ -38,7 +38,7 @@
                 <td>${chatLieu.id}</td>
                 <td>${chatLieu.tenChatLieu}</td>
                 <td>${chatLieu.moTa}</td>
-                <td>${chatLieu.trangThai == 'Hoạt động' ? 'Hoạt động' : 'Ngừng hoạt động'}</td>
+                <td>${chatLieu.sanPhamChiTiet}</td>
                 <td>
                     <!-- Nút sửa (mở modal) -->
                     <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#suaModal-${chatLieu.id}">
@@ -74,13 +74,6 @@
                                     <label for="moTa-${chatLieu.id}" class="form-label">Mô Tả</label>
                                     <textarea class="form-control" id="moTa-${chatLieu.id}" name="moTa" rows="3" required>${chatLieu.moTa}</textarea>
                                 </div>
-                                <div class="mb-3">
-                                    <label for="trangThai-${chatLieu.id}" class="form-label">Trạng Thái</label>
-                                    <select class="form-select" id="trangThai-${chatLieu.id}" name="trangThai" required>
-                                        <option value="Hoạt động" ${chatLieu.trangThai == 'Hoạt động' ? 'selected' : ''}>Hoạt động</option>
-                                        <option value="Ngừng hoạt động" ${chatLieu.trangThai == 'Ngừng hoạt động' ? 'selected' : ''}>Ngừng hoạt động</option>
-                                    </select>
-                                </div>
                                 <button type="submit" class="btn btn-primary">Chỉnh sửa</button>
                             </form>
                         </div>
@@ -110,13 +103,6 @@
                     <div class="mb-3">
                         <label for="moTa" class="form-label">Mô Tả</label>
                         <textarea class="form-control" id="moTa" name="moTa" rows="3" required></textarea>
-                    </div>
-                    <div class="mb-3">
-                        <label for="trangThai" class="form-label">Trạng Thái</label>
-                        <select class="form-select" id="trangThai" name="trangThai" required>
-                            <option value="Hoạt động">Hoạt động</option>
-                            <option value="Ngừng hoạt động">Ngừng hoạt động</option>
-                        </select>
                     </div>
                     <button type="submit" class="btn btn-primary">Lưu</button>
                 </form>
