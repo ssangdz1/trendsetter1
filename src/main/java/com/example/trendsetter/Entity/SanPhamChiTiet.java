@@ -5,9 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.jpa.repository.Query;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -46,4 +46,16 @@ public class SanPhamChiTiet {
     @ManyToOne
     @JoinColumn(name = "id_xuat_su",referencedColumnName = "id")
     private XuatSu xuatSu;
+
+    @OneToMany(mappedBy = "sanPhamChiTiet")
+    private List<HinhAnh> hinhAnhs;
+
+    @OneToMany(mappedBy = "sanPhamChiTiet")
+    private List<ChatLieu> chatLieus;
+
+    @OneToMany(mappedBy = "sanPhamChiTiet")
+    private List<MauSac> mauSacs;
+
+    @OneToMany(mappedBy = "sanPhamChiTiet")
+    private List<KichThuoc> kichThuocs;
 }

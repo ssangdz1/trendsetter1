@@ -120,8 +120,6 @@
                                 </div>
 
                                 <!-- Thông Tin Khác -->
-
-
                                 <div class="row mb-3">
                                     <div class="col-md-6">
                                         <label for="thuongHieu-${spct.id}" class="form-label">Thương Hiệu</label>
@@ -150,29 +148,29 @@
 
 <!-- Modal thêm mới sản phẩm chi tiết -->
 <div class="modal fade" id="themMoiModal" tabindex="-1" aria-labelledby="themMoiLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header bg-primary text-white">
                 <h5 class="modal-title" id="themMoiLabel">Thêm Mới Sản Phẩm Chi Tiết</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form action="/san-pham-chi-tiet/add" method="post" enctype="multipart/form-data">
-                    <!-- Các trường thông tin -->
+                    <!-- Thông tin cơ bản -->
                     <div class="row mb-3">
                         <div class="col-md-6">
                             <label for="giaBan" class="form-label">Giá Bán</label>
-                            <input type="number" step="0.01" class="form-control" id="giaBan" name="giaBan" required>
+                            <input type="number" step="0.01" class="form-control" id="giaBan" name="giaBan" placeholder="Nhập giá bán" required>
                         </div>
                         <div class="col-md-6">
                             <label for="soLuong" class="form-label">Số Lượng</label>
-                            <input type="number" class="form-control" id="soLuong" name="soLuong" required>
+                            <input type="number" class="form-control" id="soLuong" name="soLuong" placeholder="Nhập số lượng" required>
                         </div>
                     </div>
 
-                    <!-- Danh Mục Chọn -->
+                    <!-- Danh mục chọn -->
                     <div class="row mb-3">
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <label for="sanPham" class="form-label">Tên Sản Phẩm</label>
                             <select class="form-select" id="sanPham" name="sanPham" required>
                                 <c:forEach items="${listSanPham}" var="sanPham">
@@ -180,67 +178,65 @@
                                 </c:forEach>
                             </select>
                         </div>
-                        <div class="col-md-6">
-                            <label for="xuatSu" class="form-label">Tên Xuất Sứ</label>
+                        <div class="col-md-4">
+                            <label for="xuatSu" class="form-label">Xuất Xứ</label>
                             <select class="form-select" id="xuatSu" name="xuatSu" required>
                                 <c:forEach items="${listXuatSu}" var="xuatSu">
                                     <option value="${xuatSu.id}">${xuatSu.tenXuatSu}</option>
                                 </c:forEach>
                             </select>
                         </div>
-                        <div class="col-md-6">
-                            <label for="thuongHieu" class="form-label">Tên Thương Hiệu</label>
+                        <div class="col-md-4">
+                            <label for="thuongHieu" class="form-label">Thương Hiệu</label>
                             <select class="form-select" id="thuongHieu" name="thuongHieu" required>
                                 <c:forEach items="${listThuongHieu}" var="thuongHieu">
                                     <option value="${thuongHieu.id}">${thuongHieu.tenThuongHieu}</option>
                                 </c:forEach>
                             </select>
                         </div>
+                    </div>
 
-                    </div>
-<%--                    Thông tin khác--%>
+                    <!-- Màu sắc, kích thước, chất liệu -->
                     <div class="row mb-3">
-                        <div class="col-md-6">
-                            <label for="mauSac" class="form-label">Tên Màu Sắc</label>
-                            <div id="mauSac">
+                        <div class="col-md-4">
+                            <label class="form-label">Màu Sắc</label>
+                            <div class="form-check-group" id="mauSac">
                                 <c:forEach items="${listMauSac}" var="mauSac">
-                                    <div class="form-check d-flex align-items-center">
-                                        <input class="form-check-input me-2" type="checkbox" id="mauSac${mauSac.id}" name="mauSac" value="${mauSac.id}">
-                                        <label class="form-check-label" for="mauSac${mauSac.id}">
-                                                ${mauSac.tenMauSac}
-                                        </label>
+                                    <div class="form-check">
+                                        <input type="checkbox" name="tenMauSac" value="${mauSac.id}">
+                                        <label class="form-check-label">${mauSac.tenMauSac}</label>
                                     </div>
                                 </c:forEach>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <label for="kichThuoc" class="form-label">Tên Kích Thước</label>
-                            <div id="kichThuoc">
+                        <div class="col-md-4">
+                            <label class="form-label">Kích Thước</label>
+                            <div class="form-check-group" id="kichThuoc">
                                 <c:forEach items="${listKichThuoc}" var="kichThuoc">
-                                    <div class="form-check d-flex align-items-center">
-                                        <input class="form-check-input me-2" type="checkbox" id="kichThuoc${kichThuoc.id}" name="kichThuoc" value="${kichThuoc.id}">
-                                        <label class="form-check-label" for="kichThuoc${kichThuoc.id}">
-                                                ${kichThuoc.tenKichThuoc}
-                                        </label>
+                                    <div class="form-check">
+                                        <input type="checkbox" name="tenKichThuoc" value="${kichThuoc.id}">
+                                        <label class="form-check-label">${kichThuoc.tenKichThuoc}</label>
                                     </div>
                                 </c:forEach>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <label for="chatLieu" class="form-label">Tên Chất Liệu</label>
-                            <div id="chatLieu">
+                        <div class="col-md-4">
+                            <label class="form-label">Chất Liệu</label>
+                            <div class="form-check-group" id="chatLieu">
                                 <c:forEach items="${listChatLieu}" var="chatLieu">
-                                    <div class="form-check d-flex align-items-center">
-                                        <input class="form-check-input me-2" type="checkbox" id="chatLieu${chatLieu.id}" name="chatLieu" value="${chatLieu.id}">
-                                        <label class="form-check-label" for="chatLieu${chatLieu.id}">
-                                                ${chatLieu.tenChatLieu}
-                                        </label>
+                                    <div class="form-check">
+                                        <input type="checkbox" name="tenChatLieu" value="${chatLieu.id}">
+                                        <label class="form-check-label">${chatLieu.tenChatLieu}</label>
                                     </div>
                                 </c:forEach>
                             </div>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary w-100">Thêm Sản Phẩm</button>
+
+                    <!-- Nút submit -->
+                    <button type="submit" class="btn btn-primary w-100">
+                        <i class="fas fa-plus"></i> Thêm Sản Phẩm
+                    </button>
                 </form>
             </div>
         </div>

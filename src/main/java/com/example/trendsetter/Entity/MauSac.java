@@ -26,4 +26,6 @@ public class MauSac {
     @ManyToOne
     @JoinColumn(name = "id_san_pham_chi_tiet",referencedColumnName = "id")
     private SanPhamChiTiet sanPhamChiTiet;
+
+
 }

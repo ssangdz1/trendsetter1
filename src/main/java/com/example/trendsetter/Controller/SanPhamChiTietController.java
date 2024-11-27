@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/san-pham-chi-tiet")
@@ -74,21 +76,50 @@ public class SanPhamChiTietController {
     }
 
     @PostMapping("/add")
-    public String add(SanPhamChiTiet sanPhamChiTiet,
-                      @ModelAttribute MauSac mauSac,
-                      @ModelAttribute KichThuoc kichThuoc,
-                      @ModelAttribute ChatLieu chatLieu) {
+    public String addSanPhamChiTiet(
+            @ModelAttribute SanPhamChiTiet sanPhamChiTiet,
+            @RequestParam List<String> tenMauSac, // Danh sách tên màu sắc
+            @RequestParam List<String> tenKichThuoc, // Danh sách tên kích thước
+            @RequestParam List<String> tenChatLieu // Danh sách tên chất liệu
+    ) {
+        // Gán giá trị mặc định cho SanPhamChiTiet
         sanPhamChiTiet.setNgayTao(LocalDateTime.now());
+        sanPhamChiTiet.setNgaySua(LocalDateTime.now());
         sanPhamChiTiet.setTrangThai("Đang Hoạt Động");
+
+        // Lưu sản phẩm chi tiết
         sanPhamChiTietRepository.save(sanPhamChiTiet);
-        mauSacRepository.save(mauSac);
-        mauSac.setTrangThai("");
-        chatLieuRepository.save(chatLieu);
-        chatLieu.setMoTa("");
-        kichThuocRepository.save(kichThuoc);
-        kichThuoc.setTrangThai("");
+
+        // Thêm màu sắc
+        for (String tenMau : tenMauSac) {
+            MauSac mauSac = new MauSac();
+            mauSac.setTenMauSac(tenMau);
+            mauSac.setTrangThai("Đang Hoạt Động");
+            mauSac.setSanPhamChiTiet(sanPhamChiTiet);
+            mauSacRepository.save(mauSac);
+        }
+
+        // Thêm kích thước
+        for (String tenKich : tenKichThuoc) {
+            KichThuoc kichThuoc = new KichThuoc();
+            kichThuoc.setTenKichThuoc(tenKich);
+            kichThuoc.setTrangThai("Đang Hoạt Động");
+            kichThuoc.setSanPhamChiTiet(sanPhamChiTiet);
+            kichThuocRepository.save(kichThuoc);
+        }
+
+        // Thêm chất liệu
+        for (String tenChat : tenChatLieu) {
+            ChatLieu chatLieu = new ChatLieu();
+            chatLieu.setTenChatLieu(tenChat);
+            chatLieu.setMoTa("Mô tả mặc định"); // Thay đổi nếu cần
+            chatLieu.setSanPhamChiTiet(sanPhamChiTiet);
+            chatLieuRepository.save(chatLieu);
+        }
+
         return "redirect:/san-pham-chi-tiet/hien-thi";
     }
+
 
     @GetMapping("/update/{id}")
     public String showUpdate(@PathVariable("id") Integer id, Model model) {
@@ -97,19 +128,82 @@ public class SanPhamChiTietController {
     }
 
     @PostMapping("/update")
-    public String update(SanPhamChiTiet sanPhamChiTiet) {
-        sanPhamChiTiet.setNgayTao(sanPhamChiTiet.getNgayTao());
-        sanPhamChiTiet.setNgaySua(LocalDateTime.now());
-        sanPhamChiTiet.setTrangThai("Đang Hoạt Động");
-        sanPhamChiTietRepository.save(sanPhamChiTiet);
+    public String update(
+            @ModelAttribute SanPhamChiTiet sanPhamChiTiet,
+            @RequestParam List<String> tenMauSac, // Danh sách tên màu sắc mới
+            @RequestParam List<String> tenKichThuoc, // Danh sách tên kích thước mới
+            @RequestParam List<String> tenChatLieu, // Danh sách tên chất liệu mới
+            RedirectAttributes redirectAttributes
+    ) {
+        // Tìm sản phẩm chi tiết để cập nhật
+        SanPhamChiTiet existingSanPhamChiTiet = sanPhamChiTietRepository.findById(sanPhamChiTiet.getId())
+                .orElse(null);
+        if (existingSanPhamChiTiet == null) {
+            redirectAttributes.addFlashAttribute("error", "Sản phẩm không tồn tại!");
+            return "redirect:/san-pham-chi-tiet/hien-thi";
+        }
+
+        // Cập nhật thông tin cơ bản
+        existingSanPhamChiTiet.setNgayTao(sanPhamChiTiet.getNgayTao());
+        existingSanPhamChiTiet.setNgaySua(LocalDateTime.now());
+        existingSanPhamChiTiet.setTrangThai("Đang Hoạt Động");
+
+        // Cập nhật màu sắc
+        mauSacRepository.deleteAllBySanPhamChiTiet(existingSanPhamChiTiet);
+        for (String tenMau : tenMauSac) {
+            MauSac mauSac = new MauSac();
+            mauSac.setTenMauSac(tenMau);
+            mauSac.setSanPhamChiTiet(existingSanPhamChiTiet);
+            mauSacRepository.save(mauSac);
+        }
+
+        // Cập nhật kích thước
+        kichThuocRepository.deleteAllBySanPhamChiTiet(existingSanPhamChiTiet);
+        for (String tenKich : tenKichThuoc) {
+            KichThuoc kichThuoc = new KichThuoc();
+            kichThuoc.setTenKichThuoc(tenKich);
+            kichThuoc.setSanPhamChiTiet(existingSanPhamChiTiet);
+            kichThuocRepository.save(kichThuoc);
+        }
+
+        // Cập nhật chất liệu
+        chatLieuRepository.deleteAllBySanPhamChiTiet(existingSanPhamChiTiet);
+        for (String tenChat : tenChatLieu) {
+            ChatLieu chatLieu = new ChatLieu();
+            chatLieu.setTenChatLieu(tenChat);
+            chatLieu.setSanPhamChiTiet(existingSanPhamChiTiet);
+            chatLieuRepository.save(chatLieu);
+        }
+
+        // Lưu thay đổi
+        sanPhamChiTietRepository.save(existingSanPhamChiTiet);
+        redirectAttributes.addFlashAttribute("success", "Cập nhật sản phẩm thành công!");
         return "redirect:/san-pham-chi-tiet/hien-thi";
     }
 
+
     @GetMapping("/delete")
-    public String delete(@RequestParam("id") Integer id) {
+    public String delete(@RequestParam("id") Integer id, RedirectAttributes redirectAttributes) {
+        // Kiểm tra sản phẩm có tồn tại không
+        SanPhamChiTiet sanPhamChiTiet = sanPhamChiTietRepository.findById(id)
+                .orElse(null);
+        if (sanPhamChiTiet == null) {
+            redirectAttributes.addFlashAttribute("error", "Sản phẩm không tồn tại!");
+            return "redirect:/san-pham-chi-tiet/hien-thi";
+        }
+
+        // Xóa các mối quan hệ
+        mauSacRepository.deleteAllBySanPhamChiTiet(sanPhamChiTiet);
+        kichThuocRepository.deleteAllBySanPhamChiTiet(sanPhamChiTiet);
+        chatLieuRepository.deleteAllBySanPhamChiTiet(sanPhamChiTiet);
+
+        // Xóa sản phẩm chi tiết
         sanPhamChiTietRepository.deleteById(id);
+
+        redirectAttributes.addFlashAttribute("success", "Xóa sản phẩm thành công!");
         return "redirect:/san-pham-chi-tiet/hien-thi";
     }
+
 
     @PostMapping("/delete-multiple")
     public String deleteMultiple(@RequestParam List<Integer> ids, RedirectAttributes redirectAttributes) {
