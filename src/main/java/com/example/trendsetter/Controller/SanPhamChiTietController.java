@@ -71,7 +71,7 @@ public class SanPhamChiTietController {
 
     @GetMapping("/hien-thi")
     public String hienThi( Model model) {
-        model.addAttribute("danhSach", sanPhamChiTietRepository.findAll());
+        model.addAttribute("danhSach", sanPhamRepository.findAll());
         return "SanPhamChiTiet/hien-thi";
     }
 
@@ -112,7 +112,7 @@ public class SanPhamChiTietController {
         for (String tenChat : tenChatLieu) {
             ChatLieu chatLieu = new ChatLieu();
             chatLieu.setTenChatLieu(tenChat);
-            chatLieu.setMoTa("Mô tả mặc định"); // Thay đổi nếu cần
+            chatLieu.setTrangThai("Đang Hoạt Động"); // Thay đổi nếu cần
             chatLieu.setSanPhamChiTiet(sanPhamChiTiet);
             chatLieuRepository.save(chatLieu);
         }
@@ -129,55 +129,11 @@ public class SanPhamChiTietController {
 
     @PostMapping("/update")
     public String update(
-            @ModelAttribute SanPhamChiTiet sanPhamChiTiet,
-            @RequestParam List<String> tenMauSac, // Danh sách tên màu sắc mới
-            @RequestParam List<String> tenKichThuoc, // Danh sách tên kích thước mới
-            @RequestParam List<String> tenChatLieu, // Danh sách tên chất liệu mới
-            RedirectAttributes redirectAttributes
-    ) {
-        // Tìm sản phẩm chi tiết để cập nhật
-        SanPhamChiTiet existingSanPhamChiTiet = sanPhamChiTietRepository.findById(sanPhamChiTiet.getId())
-                .orElse(null);
-        if (existingSanPhamChiTiet == null) {
-            redirectAttributes.addFlashAttribute("error", "Sản phẩm không tồn tại!");
-            return "redirect:/san-pham-chi-tiet/hien-thi";
-        }
-
-        // Cập nhật thông tin cơ bản
-        existingSanPhamChiTiet.setNgayTao(sanPhamChiTiet.getNgayTao());
-        existingSanPhamChiTiet.setNgaySua(LocalDateTime.now());
-        existingSanPhamChiTiet.setTrangThai("Đang Hoạt Động");
-
-        // Cập nhật màu sắc
-        mauSacRepository.deleteAllBySanPhamChiTiet(existingSanPhamChiTiet);
-        for (String tenMau : tenMauSac) {
-            MauSac mauSac = new MauSac();
-            mauSac.setTenMauSac(tenMau);
-            mauSac.setSanPhamChiTiet(existingSanPhamChiTiet);
-            mauSacRepository.save(mauSac);
-        }
-
-        // Cập nhật kích thước
-        kichThuocRepository.deleteAllBySanPhamChiTiet(existingSanPhamChiTiet);
-        for (String tenKich : tenKichThuoc) {
-            KichThuoc kichThuoc = new KichThuoc();
-            kichThuoc.setTenKichThuoc(tenKich);
-            kichThuoc.setSanPhamChiTiet(existingSanPhamChiTiet);
-            kichThuocRepository.save(kichThuoc);
-        }
-
-        // Cập nhật chất liệu
-        chatLieuRepository.deleteAllBySanPhamChiTiet(existingSanPhamChiTiet);
-        for (String tenChat : tenChatLieu) {
-            ChatLieu chatLieu = new ChatLieu();
-            chatLieu.setTenChatLieu(tenChat);
-            chatLieu.setSanPhamChiTiet(existingSanPhamChiTiet);
-            chatLieuRepository.save(chatLieu);
-        }
-
-        // Lưu thay đổi
-        sanPhamChiTietRepository.save(existingSanPhamChiTiet);
-        redirectAttributes.addFlashAttribute("success", "Cập nhật sản phẩm thành công!");
+            @ModelAttribute SanPhamChiTiet sanPhamChiTiet){
+        sanPhamChiTiet.setNgayTao(sanPhamChiTiet.getNgayTao());
+        sanPhamChiTiet.setNgaySua(LocalDateTime.now());
+        sanPhamChiTiet.setTrangThai("Đang Hoạt Động");
+        sanPhamChiTietRepository.save(sanPhamChiTiet);
         return "redirect:/san-pham-chi-tiet/hien-thi";
     }
 
@@ -211,8 +167,8 @@ public class SanPhamChiTietController {
             redirectAttributes.addFlashAttribute("error", "Không có sản phẩm nào được chọn để xóa.");
             return "redirect:/san-pham-chi-tiet/hien-thi";
         }
-            // Thực hiện xóa từng sản phẩm chi tiết theo danh sách ID
-            ids.forEach(id -> sanPhamChiTietRepository.deleteById(id));
+        // Thực hiện xóa từng sản phẩm chi tiết theo danh sách ID
+        ids.forEach(id -> sanPhamChiTietRepository.deleteById(id));
 
         return "redirect:/san-pham-chi-tiet/hien-thi";
     }

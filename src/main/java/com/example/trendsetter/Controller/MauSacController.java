@@ -21,6 +21,7 @@ public class MauSacController {
     }
     @PostMapping("/add")
     public String add(MauSac mauSac){
+        mauSac.setTrangThai("Đang Hoạt Động");
         mauSacRepository.save(mauSac);
         return "redirect:/mau-sac/hien-thi";
     }
@@ -32,6 +33,7 @@ public class MauSacController {
     }
     @PostMapping("/update")
     public String update(MauSac mauSac){
+        mauSac.setTrangThai("Đang Hoạt Động");
         mauSacRepository.save(mauSac);
         return "redirect:/mau-sac/hien-thi";
     }

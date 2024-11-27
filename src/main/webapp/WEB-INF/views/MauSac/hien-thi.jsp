@@ -69,13 +69,6 @@
                                     <label for="tenMauSac-${mauSac.id}" class="form-label">Tên Màu Sắc</label>
                                     <input type="text" class="form-control" id="tenMauSac-${mauSac.id}" name="tenMauSac" value="${mauSac.tenMauSac}" required>
                                 </div>
-                                <div class="mb-3">
-                                    <label for="trangThai-${mauSac.id}" class="form-label">Trạng Thái</label>
-                                    <select class="form-select" id="trangThai-${mauSac.id}" name="trangThai" required>
-                                        <option value="Hoạt Động" ${mauSac.trangThai == 'Hoạt Động' ? 'selected' : ''}>Hoạt Động</option>
-                                        <option value="Không Hoạt Động" ${mauSac.trangThai == 'Không Hoạt Động' ? 'selected' : ''}>Không Hoạt Động</option>
-                                    </select>
-                                </div>
                                 <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
                             </form>
                         </div>
@@ -101,13 +94,6 @@
                     <div class="mb-3">
                         <label for="tenMauSac" class="form-label">Tên Màu Sắc</label>
                         <input type="text" class="form-control" id="tenMauSac" name="tenMauSac" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="trangThai" class="form-label">Trạng Thái</label>
-                        <select class="form-select" id="trangThai" name="trangThai" required>
-                            <option value="Hoạt Động">Hoạt Động</option>
-                            <option value="Không Hoạt Động">Không Hoạt Động</option>
-                        </select>
                     </div>
                     <button type="submit" class="btn btn-primary">Thêm Mới</button>
                 </form>

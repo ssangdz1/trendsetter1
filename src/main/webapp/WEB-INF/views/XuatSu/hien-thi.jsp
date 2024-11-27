@@ -67,13 +67,6 @@
                                     <label for="tenXuatSu-${xuatSu.id}" class="form-label">Tên Xuất Xứ</label>
                                     <input type="text" class="form-control" id="tenXuatSu-${xuatSu.id}" name="tenXuatSu" value="${xuatSu.tenXuatSu}" required>
                                 </div>
-                                <div class="mb-3">
-                                    <label for="trangThai-${xuatSu.id}" class="form-label">Trạng Thái</label>
-                                    <select class="form-select" id="trangThai-${xuatSu.id}" name="trangThai" required>
-                                        <option value="Hoạt Động" ${xuatSu.trangThai == 'Hoạt Động' ? 'selected' : ''}>Hoạt Động</option>
-                                        <option value="Không Hoạt Động" ${xuatSu.trangThai == 'Không Hoạt Động' ? 'selected' : ''}>Không Hoạt Động</option>
-                                    </select>
-                                </div>
                                 <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
                             </form>
                         </div>
@@ -99,13 +92,6 @@
                     <div class="mb-3">
                         <label for="tenXuatSu" class="form-label">Tên Xuất Xứ</label>
                         <input type="text" class="form-control" id="tenXuatSu" name="tenXuatSu" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="trangThai" class="form-label">Trạng Thái</label>
-                        <select class="form-select" id="trangThai" name="trangThai" required>
-                            <option value="Hoạt Động">Hoạt Động</option>
-                            <option value="Không Hoạt Động">Không Hoạt Động</option>
-                        </select>
                     </div>
                     <button type="submit" class="btn btn-primary">Thêm Mới</button>
                 </form>

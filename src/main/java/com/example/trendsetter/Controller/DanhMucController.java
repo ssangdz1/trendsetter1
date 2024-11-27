@@ -20,6 +20,7 @@ public class DanhMucController {
     }
     @PostMapping("/add")
     public String add(DanhMuc danhMuc){
+        danhMuc.setTrangThai("Đang Hoạt Động");
         danhMucRepository.save(danhMuc);
         return "redirect:/danh-muc/hien-thi";
     }
@@ -31,6 +32,7 @@ public class DanhMucController {
     }
     @PostMapping("/update")
     public String update(DanhMuc danhMuc){
+        danhMuc.setTrangThai("Đang Hoạt Động");
         danhMucRepository.save(danhMuc);
         return "redirect:/danh-muc/hien-thi";
     }

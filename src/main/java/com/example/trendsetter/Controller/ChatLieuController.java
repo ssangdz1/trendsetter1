@@ -21,6 +21,7 @@ public class ChatLieuController {
     }
     @PostMapping("/add")
     public String add(ChatLieu chatLieu){
+        chatLieu.setTrangThai("Đang Hoạt Động");
         chatLieuRepository.save(chatLieu);
         return "redirect:/chat-lieu/hien-thi";
     }
@@ -32,6 +33,7 @@ public class ChatLieuController {
     }
     @PostMapping("/update")
     public String update(ChatLieu chatLieu){
+        chatLieu.setTrangThai("Đang Hoạt Động");
         chatLieuRepository.save(chatLieu);
         return "redirect:/chat-lieu/hien-thi";
     }

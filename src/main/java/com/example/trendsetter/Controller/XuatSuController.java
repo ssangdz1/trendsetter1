@@ -21,6 +21,7 @@ public class XuatSuController {
     }
     @PostMapping("/add")
     public String add(XuatSu xuatSu){
+        xuatSu.setTrangThai("Đang Hoạt Động");
         xuatSuRepository.save(xuatSu);
         return "redirect:/xuat-su/hien-thi";
     }
@@ -32,6 +33,7 @@ public class XuatSuController {
     }
     @PostMapping("/update")
     public String update(XuatSu xuatSu){
+        xuatSu.setTrangThai("Đang Hoạt Động");
         xuatSuRepository.save(xuatSu);
         return "redirect:/xuat-su/hien-thi";
     }

@@ -35,6 +35,7 @@ public class SanPhamController {
     @PostMapping("/add")
     public String add(SanPham sanPham){
         sanPham.setNgayTao(LocalDateTime.now());
+        sanPham.setTrangThai("Đang Hoạt Động");
         sanPhamRepository.save(sanPham);
         return "redirect:/san-pham/hien-thi";
     }
@@ -47,6 +48,7 @@ public class SanPhamController {
     @PostMapping("/update")
     public String update(SanPham sanPham){
         sanPham.setNgaySua(LocalDateTime.now());
+        sanPham.setTrangThai("Đang Hoạt Động");
         sanPhamRepository.save(sanPham);
         return "redirect:/san-pham/hien-thi";
     }

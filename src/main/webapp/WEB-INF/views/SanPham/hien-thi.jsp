@@ -85,13 +85,6 @@
                                     <label for="ngayTao-${sanPham.id}" class="form-label">Ngày Tạo</label>
                                     <input type="datetime-local" class="form-control" id="ngayTao-${sanPham.id}" name="ngayTao" value="${sanPham.ngayTao}" readonly>
                                 </div>
-                                <div class="mb-3">
-                                    <label for="trangThai-${sanPham.id}" class="form-label">Trạng Thái</label>
-                                    <select class="form-select" id="trangThai-${sanPham.id}" name="trangThai" required>
-                                        <option value="Hoạt Động" ${sanPham.trangThai == 'Hoạt Động' ? 'selected' : ''}>Hoạt Động</option>
-                                        <option value="Không Hoạt Động" ${sanPham.trangThai == 'Không Hoạt Động' ? 'selected' : ''}>Không Hoạt Động</option>
-                                    </select>
-                                </div>
                                 <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
                             </form>
                         </div>
@@ -124,13 +117,6 @@
                             <c:forEach items="${listDanhMuc}" var="danhMuc">
                                 <option value="${danhMuc.id}">${danhMuc.tenDanhMuc}</option>
                             </c:forEach>
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label for="trangThai" class="form-label">Trạng Thái</label>
-                        <select class="form-select" id="trangThai" name="trangThai" required>
-                            <option value="Hoạt Động">Hoạt Động</option>
-                            <option value="Không Hoạt Động">Không Hoạt Động</option>
                         </select>
                     </div>
                     <button type="submit" class="btn btn-primary">Thêm Mới</button>

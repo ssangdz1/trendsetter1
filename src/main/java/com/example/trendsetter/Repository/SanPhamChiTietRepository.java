@@ -10,6 +10,6 @@ import java.util.List;
 
 @Repository
 public interface SanPhamChiTietRepository extends JpaRepository<SanPhamChiTiet,Integer>{
-    @Query("SELECT sp FROM SanPhamChiTiet sp JOIN FETCH sp.hinhAnhs ha JOIN FETCH sp.chatLieus cl JOIN FETCH sp.mauSacs ms JOIN FETCH sp.kichThuocs kt")
+    @Query("SELECT sp FROM SanPhamChiTiet sp JOIN FETCH sp.hinhAnh ha JOIN FETCH sp.chatLieu cl JOIN FETCH sp.mauSac ms JOIN FETCH sp.kichThuoc kt")
     List<SanPhamChiTiet> findAllWithDetails();
 }

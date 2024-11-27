@@ -38,7 +38,7 @@
                 <td>${kichThuoc.id}</td>
                 <td>${kichThuoc.tenKichThuoc}</td>
                 <td>${kichThuoc.trangThai}</td>
-                <td>${kichThuoc.sanPhamChiTiet}</td>
+                <td>${kichThuoc.sanPhamChiTiet.id}</td>
                 <td>
                     <!-- Nút sửa (mở modal) -->
                     <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#suaModal-${kichThuoc.id}">
@@ -68,13 +68,6 @@
                                 <div class="mb-3">
                                     <label for="tenKichThuoc-${kichThuoc.id}" class="form-label">Tên Kích Thước</label>
                                     <input type="text" class="form-control" id="tenKichThuoc-${kichThuoc.id}" name="tenKichThuoc" value="${kichThuoc.tenKichThuoc}" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="trangThai-${kichThuoc.id}" class="form-label">Trạng Thái</label>
-                                    <select class="form-select" id="trangThai-${kichThuoc.id}" name="trangThai" required>
-                                        <option value="Hoạt Động" ${kichThuoc.trangThai == 'Hoạt Động' ? 'selected' : ''}>Hoạt Động</option>
-                                        <option value="Không Hoạt Động" ${kichThuoc.trangThai == 'Không Hoạt Động' ? 'selected' : ''}>Không Hoạt Động</option>
-                                    </select>
                                 </div>
                                 <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
                             </form>

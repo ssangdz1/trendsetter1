@@ -27,7 +27,7 @@
         <tr>
             <th>Id</th>
             <th>Tên Chất Liệu</th>
-            <th>Mô Tả</th>
+            <th>Trạng Thai</th>
             <th>Id SPCT</th>
             <th>Chức Năng</th>
         </tr>
@@ -37,8 +37,8 @@
             <tr>
                 <td>${chatLieu.id}</td>
                 <td>${chatLieu.tenChatLieu}</td>
-                <td>${chatLieu.moTa}</td>
-                <td>${chatLieu.sanPhamChiTiet}</td>
+                <td>${chatLieu.trangThai}</td>
+                <td>${chatLieu.sanPhamChiTiet.id}</td>
                 <td>
                     <!-- Nút sửa (mở modal) -->
                     <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#suaModal-${chatLieu.id}">
@@ -70,10 +70,6 @@
                                     <input type="text" class="form-control" id="tenChatLieu-${chatLieu.id}" name="tenChatLieu"
                                            value="${chatLieu.tenChatLieu}" required>
                                 </div>
-                                <div class="mb-3">
-                                    <label for="moTa-${chatLieu.id}" class="form-label">Mô Tả</label>
-                                    <textarea class="form-control" id="moTa-${chatLieu.id}" name="moTa" rows="3" required>${chatLieu.moTa}</textarea>
-                                </div>
                                 <button type="submit" class="btn btn-primary">Chỉnh sửa</button>
                             </form>
                         </div>
@@ -99,10 +95,6 @@
                     <div class="mb-3">
                         <label for="tenChatLieu" class="form-label">Tên Chất Liệu</label>
                         <input type="text" class="form-control" id="tenChatLieu" name="tenChatLieu" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="moTa" class="form-label">Mô Tả</label>
-                        <textarea class="form-control" id="moTa" name="moTa" rows="3" required></textarea>
                     </div>
                     <button type="submit" class="btn btn-primary">Lưu</button>
                 </form>

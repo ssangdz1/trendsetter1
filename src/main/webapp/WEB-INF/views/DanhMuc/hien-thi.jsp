@@ -67,13 +67,6 @@
                                     <label for="tenDanhMuc-${danhMuc.id}" class="form-label">Tên Danh Mục</label>
                                     <input type="text" class="form-control" id="tenDanhMuc-${danhMuc.id}" name="tenDanhMuc" value="${danhMuc.tenDanhMuc}" required>
                                 </div>
-                                <div class="mb-3">
-                                    <label for="trangThai-${danhMuc.id}" class="form-label">Trạng Thái</label>
-                                    <select class="form-select" id="trangThai-${danhMuc.id}" name="trangThai" required>
-                                        <option value="Active" ${danhMuc.trangThai == 'Hoạt Động' ? 'selected' : ''}>Hoạt Động</option>
-                                        <option value="Inactive" ${danhMuc.trangThai == 'Ngừng Hoạt Động' ? 'selected' : ''}>Ngừng Hoạt Động</option>
-                                    </select>
-                                </div>
                                 <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
                             </form>
                         </div>
@@ -99,13 +92,6 @@
                     <div class="mb-3">
                         <label for="tenDanhMuc" class="form-label">Tên Danh Mục</label>
                         <input type="text" class="form-control" id="tenDanhMuc" name="tenDanhMuc" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="trangThai" class="form-label">Trạng Thái</label>
-                        <select class="form-select" id="trangThai" name="trangThai" required>
-                            <option value="Hoạt Động">Hoạt Động</option>
-                            <option value="Ngừng Hoạt Động">Ngừng Hoạt Động</option>
-                        </select>
                     </div>
                     <button type="submit" class="btn btn-primary">Thêm Mới</button>
                 </form>

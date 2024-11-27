@@ -48,14 +48,14 @@ public class SanPhamChiTiet {
     private XuatSu xuatSu;
 
     @OneToMany(mappedBy = "sanPhamChiTiet")
-    private List<HinhAnh> hinhAnhs;
+    private List<HinhAnh> hinhAnh;
 
     @OneToMany(mappedBy = "sanPhamChiTiet")
-    private List<ChatLieu> chatLieus;
+    private List<ChatLieu> chatLieu;
 
     @OneToMany(mappedBy = "sanPhamChiTiet")
-    private List<MauSac> mauSacs;
+    private List<MauSac> mauSac;
 
     @OneToMany(mappedBy = "sanPhamChiTiet")
-    private List<KichThuoc> kichThuocs;
+    private List<KichThuoc> kichThuoc;
 }

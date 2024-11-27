@@ -20,8 +20,8 @@ public class ChatLieu {
     @Column(name = "ten_chat_lieu")
     private String tenChatLieu;
 
-    @Column(name = "mo_ta")
-    private String moTa;
+    @Column(name = "trang_thai")
+    private String trangThai;
 
     @ManyToOne
     @JoinColumn(name = "id_san_pham_chi_tiet",referencedColumnName = "id")

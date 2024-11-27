@@ -21,6 +21,7 @@ public class ThuongHieuController {
     }
     @PostMapping("/add")
     public String add(ThuongHieu thuongHieu){
+        thuongHieu.setTrangThai("Đang Hoạt Động");
         thuongHieuRepository.save(thuongHieu);
         return "redirect:/thuong-hieu/hien-thi";
     }
@@ -32,6 +33,7 @@ public class ThuongHieuController {
     }
     @PostMapping("/update")
     public String update(ThuongHieu thuongHieu){
+        thuongHieu.setTrangThai("Đang Hoạt Động");
         thuongHieuRepository.save(thuongHieu);
         return "redirect:/thuong-hieu/hien-thi";
     }

@@ -67,13 +67,6 @@
                                     <label for="tenThuongHieu-${thuongHieu.id}" class="form-label">Tên Thương Hiệu</label>
                                     <input type="text" class="form-control" id="tenThuongHieu-${thuongHieu.id}" name="tenThuongHieu" value="${thuongHieu.tenThuongHieu}" required>
                                 </div>
-                                <div class="mb-3">
-                                    <label for="trangThai-${thuongHieu.id}" class="form-label">Trạng Thái</label>
-                                    <select class="form-select" id="trangThai-${thuongHieu.id}" name="trangThai" required>
-                                        <option value="Hoạt Động" ${thuongHieu.trangThai == 'Hoạt Động' ? 'selected' : ''}>Hoạt Động</option>
-                                        <option value="Không Hoạt Động" ${thuongHieu.trangThai == 'Không Hoạt Động' ? 'selected' : ''}>Không Hoạt Động</option>
-                                    </select>
-                                </div>
                                 <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
                             </form>
                         </div>
@@ -99,13 +92,6 @@
                     <div class="mb-3">
                         <label for="tenThuongHieu" class="form-label">Tên Thương Hiệu</label>
                         <input type="text" class="form-control" id="tenThuongHieu" name="tenThuongHieu" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="trangThai" class="form-label">Trạng Thái</label>
-                        <select class="form-select" id="trangThai" name="trangThai" required>
-                            <option value="Hoạt Động">Hoạt Động</option>
-                            <option value="Không Hoạt Động">Không Hoạt Động</option>
-                        </select>
                     </div>
                     <button type="submit" class="btn btn-primary">Thêm Mới</button>
                 </form>
