@@ -14,114 +14,299 @@
 </head>
 <body>
 <div class="container mt-4">
-    <h1 class="mb-3">Quản lý Phương Thức Thanh Toán</h1>
+    <h1 class="text-center mb-3">Quản lý Phương Thức Thanh Toán</h1>
 
-    <!-- Nút thêm mới -->
-    <button class="btn btn-primary btn-sm mb-3" data-bs-toggle="modal" data-bs-target="#themMoiModal">
-        <i class="bi bi-plus-circle"></i> Thêm Mới
-    </button>
+    <%--Form tìm kiếm--%>
+    <div class="container mt-5">
+        <div class="p-4 shadow rounded" style="background-color: #f8f9fa;">
+            <!-- Tiêu đề -->
+            <div class="d-flex align-items-center mb-4">
+                <i class="bi bi-funnel me-2 text-primary" style="font-size: 1.5rem;"></i>
+                <h5 class="text-primary mb-0">Bộ lọc</h5>
+            </div>
 
-    <!-- Bảng phương thức thanh toán -->
-    <table class="table table-bordered">
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>Tên Phương Thức</th>
-            <th>Ngày Tạo</th>
-            <th>Ngày Sửa</th>
-            <th>Trạng Thái</th>
-            <th>Chức Năng</th>
-        </tr>
-        </thead>
-        <tbody>
-        <c:forEach items="${danhSach}" var="phuongThucThanhToan">
-            <tr>
-                <td>${phuongThucThanhToan.id}</td>
-                <td>${phuongThucThanhToan.tenPhuongThuc}</td>
-                <td>${phuongThucThanhToan.ngayTao}</td>
-                <td>${phuongThucThanhToan.ngaySua}</td>
-                <td>${phuongThucThanhToan.trangThai}</td>
-                <td>
-                    <!-- Nút sửa (mở modal) -->
-                    <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#suaModal-${phuongThucThanhToan.id}">
-                        <i class="bi bi-pencil-square"></i> Sửa
+            <!-- Bộ lọc -->
+            <form id="filterForm" action="/khuyen-mai/hien-thi" method="get">
+                <div class="row align-items-center">
+                    <div class="col-md-4 mb-3">
+                        <label for="searchInput" class="form-label">Tìm kiếm:</label>
+                        <input type="text" name="tenSanPham" id="searchInput" class="form-control"
+                               placeholder="Tìm kiếm"
+                               value="${param.tenSanPham}">
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="statusSelect" class="form-label">Trạng thái:</label>
+                        <select name="trangThai" id="statusSelect" class="form-select">
+                            <option value="all" ${param.trangThai == 'all' ? 'selected' : ''}>Tất cả</option>
+                            <option value="Đang Hoạt Động" ${param.trangThai == 'Đang Hoạt Động' ? 'selected' : ''}>
+                                Hoạt
+                                động
+                            </option>
+                            <option value="Không Hoạt Động" ${param.trangThai == 'Không Hoạt Động' ? 'selected' : ''}>
+                                Không
+                                hoạt động
+                            </option>
+                        </select>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label class="form-label">Thương Hiệu</label>
+                        <select class="form-select" name="tenThuongHieu">
+                            <option value="all" ${param.tenThuongHieu == 'all' ? 'selected' : ''}>Tất cả</option>
+                            <c:forEach items="${listThuongHieu}" var="thuongHieu">
+                                <option value="${thuongHieu.id}" ${thuongHieu.id == param.tenThuongHieu ? 'selected' : ''}>
+                                        ${thuongHieu.tenThuongHieu}
+                                </option>
+                            </c:forEach>
+                        </select>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary me-2">
+                        <i class="bi bi-search"></i> Tìm kiếm
                     </button>
-                    <!-- Nút xóa -->
-                    <button class="btn btn-danger btn-sm">
-                        <a href="/phuong-thuc-thanh-toan/delete?id=${phuongThucThanhToan.id}" class="text-white text-decoration-none">
-                            <i class="bi bi-trash"></i> Xóa
-                        </a>
-                    </button>
-                </td>
-            </tr>
+                </div>
+            </form>
+        </div>
+    </div>
 
-            <!-- Modal sửa phương thức thanh toán -->
-            <div class="modal fade" id="suaModal-${phuongThucThanhToan.id}" tabindex="-1" aria-labelledby="suaModalLabel-${phuongThucThanhToan.id}" aria-hidden="true">
+    <%--Giao diện--%>
+    <div class="container mt-5">
+        <!-- Thêm mới và Danh sách chất liệu -->
+        <div class="border p-3">
+            <!-- Nút thêm mới -->
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h5>Danh sách phương thức thanh toán</h5>
+                <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#themMoiModal">
+                    <i class="bi bi-plus-circle"></i> Thêm mới
+                </button>
+            </div>
+
+            <!-- Bảng phương thức thanh toán -->
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped text-center align-middle">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Tên Phương Thức</th>
+                        <th>Ngày Tạo</th>
+                        <th>Ngày Sửa</th>
+                        <th>Trạng Thái</th>
+                        <th>Chức Năng</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <c:forEach items="${danhSach}" var="phuongThucThanhToan" varStatus="status">
+                        <tr>
+                            <td><input type="hidden" value="${phuongThucThanhToan.id}">${status.index+1}</td>
+                            <td>${phuongThucThanhToan.tenPhuongThuc}</td>
+                            <td>${phuongThucThanhToan.ngayTao}</td>
+                            <td>${phuongThucThanhToan.ngaySua}</td>
+                            <td>
+                                <!-- Nút trạng thái -->
+                                <button class="btn ${phuongThucThanhToan.trangThai == 'Đang Hoạt Động' ? 'btn-success' : 'btn-danger'}"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#suaTrangThaiModal-${phuongThucThanhToan.id}">
+                                        ${phuongThucThanhToan.trangThai}
+                                </button>
+                            </td>
+                            <td>
+                                <!-- Nút sửa (mở modal) -->
+                                <button class="btn btn-warning btn-sm" data-bs-toggle="modal"
+                                        data-bs-target="#suaModal-${phuongThucThanhToan.id}">
+                                    <i class="bi bi-pencil-square"></i> Sửa
+                                </button>
+                                <!-- Nút xóa -->
+                                <form action="/phuong-thuc-thanh-toan/delete" method="post" style="display:inline;"
+                                      onsubmit="return confirm('Bạn có chắc chắn muốn xóa?');">
+                                    <input type="hidden" name="id" value="${phuongThucThanhToan.id}">
+                                    <button type="submit" class="btn btn-danger btn-sm">
+                                        <i class="bi bi-trash">Xóa</i>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+
+                        <!-- Modal sửa phương thức thanh toán -->
+                        <div class="modal fade" id="suaModal-${phuongThucThanhToan.id}" tabindex="-1"
+                             aria-labelledby="suaModalLabel-${phuongThucThanhToan.id}" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="suaModalLabel-${phuongThucThanhToan.id}">Sửa Phương
+                                            Thức Thanh Toán</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <!-- Form sửa phương thức thanh toán -->
+                                        <form action="/phuong-thuc-thanh-toan/update" method="post">
+                                            <input type="hidden" name="id" value="${phuongThucThanhToan.id}">
+                                            <div class="mb-3">
+                                                <label for="tenPhuongThuc-${phuongThucThanhToan.id}" class="form-label">Tên
+                                                    Phương Thức</label>
+                                                <input type="text" class="form-control"
+                                                       id="tenPhuongThuc-${phuongThucThanhToan.id}" name="tenPhuongThuc"
+                                                       value="${phuongThucThanhToan.tenPhuongThuc}" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="ngayTao-${phuongThucThanhToan.id}" class="form-label">Ngày
+                                                    Tạo</label>
+                                                <input type="datetime-local" class="form-control"
+                                                       id="ngayTao-${phuongThucThanhToan.id}" name="ngayTao"
+                                                       value="${phuongThucThanhToan.ngayTao}" readonly>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="trangThai-${phuongThucThanhToan.id}" class="form-label">Trạng
+                                                    Thái</label>
+                                                <select class="form-select" id="trangThai-${phuongThucThanhToan.id}"
+                                                        name="trangThai" required>
+                                                    <option value="Đang Hoạt Động" ${phuongThucThanhToan.trangThai == 'Hoạt Động' ? 'selected' : ''}>
+                                                        Đang Hoạt Động
+                                                    </option>
+                                                    <option value="Không Hoạt Động" ${phuongThucThanhToan.trangThai == 'Không Hoạt Động' ? 'selected' : ''}>
+                                                        Không Hoạt Động
+                                                    </option>
+                                                </select>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Modal sửa trạng thái -->
+                        <div class="modal fade" id="suaTrangThaiModal-${phuongThucThanhToan.id}" tabindex="-1"
+                             aria-labelledby="suaTrangThaiModalLabel-${phuongThucThanhToan.id}" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <!-- Header của Modal -->
+                                    <div class="modal-header bg-warning text-white">
+                                        <h5 class="modal-title" id="suaTrangThaiModalLabel-${phuongThucThanhToan.id}">Cập Nhật Trạng Thái</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                    </div>
+                                    <!-- Nội dung của Modal -->
+                                    <div class="modal-body">
+                                        <form action="/phuong-thuc-thanh-toan/update-trang-thai" method="post">
+                                            <input type="hidden" name="id" value="${phuongThucThanhToan.id}">
+                                            <div class="form-group">
+                                                <label for="trangThai-${phuongThucThanhToan.id}">Chọn Trạng Thái:</label>
+                                                <select class="form-control" id="trangThai-${phuongThucThanhToan.id}"
+                                                        name="trangThai">
+                                                    <option value="Đang Hoạt Động" ${phuongThucThanhToan.trangThai == 'Đang Hoạt Động' ? 'selected' : ''}>
+                                                        Đang Hoạt Động
+                                                    </option>
+                                                    <option value="Không Hoạt Động" ${phuongThucThanhToan.trangThai == 'Không Hoạt Động' ? 'selected' : ''}>
+                                                        Không Hoạt Động
+                                                    </option>
+                                                </select>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary mt-3 w-100">Lưu Thay Đổi
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </c:forEach>
+                    </tbody>
+                </table>
+                <!-- Phân trang -->
+                <nav aria-label="Page navigation">
+                    <ul class="pagination justify-content-center">
+                        <!-- Kiểm tra nếu totalPages và pageNumber có giá trị hợp lệ -->
+                        <c:if test="${not empty totalPages and totalPages > 0}">
+                            <c:forEach var="i" begin="${pageNumber - 2 < 0 ? 0 : pageNumber - 2}"
+                                       end="${pageNumber + 2 >= totalPages ? totalPages - 1 : pageNumber + 2}">
+                                <li class="page-item ${pageNumber == i ? 'active' : ''}">
+                                    <a class="page-link" href="?page=${i}">${i + 1}</a>
+                                </li>
+                            </c:forEach>
+                        </c:if>
+                        <!-- Nếu không có trang, có thể hiển thị thông báo hoặc không có gì -->
+                        <c:if test="${empty totalPages or totalPages == 0}">
+                            <li class="page-item disabled">
+                                <span class="page-link">No pages available</span>
+                            </li>
+                        </c:if>
+                    </ul>
+                </nav>
+            </div>
+            <!-- Modal thêm mới phương thức thanh toán -->
+            <div class="modal fade" id="themMoiModal" tabindex="-1" aria-labelledby="themMoiLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="suaModalLabel-${phuongThucThanhToan.id}">Sửa Phương Thức Thanh Toán</h5>
+                            <h5 class="modal-title" id="themMoiLabel">Thêm Mới Phương Thức Thanh Toán</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <!-- Form sửa phương thức thanh toán -->
-                            <form action="/phuong-thuc-thanh-toan/update" method="post">
-                                <input type="hidden" name="id" value="${phuongThucThanhToan.id}">
+                            <!-- Form thêm mới phương thức thanh toán -->
+                            <form action="/phuong-thuc-thanh-toan/add" method="post">
                                 <div class="mb-3">
-                                    <label for="tenPhuongThuc-${phuongThucThanhToan.id}" class="form-label">Tên Phương Thức</label>
-                                    <input type="text" class="form-control" id="tenPhuongThuc-${phuongThucThanhToan.id}" name="tenPhuongThuc" value="${phuongThucThanhToan.tenPhuongThuc}" required>
+                                    <label for="tenPhuongThuc" class="form-label">Tên Phương Thức</label>
+                                    <input type="text" class="form-control" id="tenPhuongThuc" name="tenPhuongThuc"
+                                           required>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="ngayTao-${phuongThucThanhToan.id}" class="form-label">Ngày Tạo</label>
-                                    <input type="datetime-local" class="form-control" id="ngayTao-${phuongThucThanhToan.id}" name="ngayTao" value="${phuongThucThanhToan.ngayTao}" readonly>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="trangThai-${phuongThucThanhToan.id}" class="form-label">Trạng Thái</label>
-                                    <select class="form-select" id="trangThai-${phuongThucThanhToan.id}" name="trangThai" required>
-                                        <option value="Hoạt Động" ${phuongThucThanhToan.trangThai == 'Hoạt Động' ? 'selected' : ''}>Hoạt Động</option>
-                                        <option value="Không Hoạt Động" ${phuongThucThanhToan.trangThai == 'Không Hoạt Động' ? 'selected' : ''}>Không Hoạt Động</option>
+                                    <label for="trangThai" class="form-label">Trạng Thái</label>
+                                    <select class="form-select" id="trangThai" name="trangThai" required>
+                                        <option value="Đang Hoạt Động"> Đang Hoạt Động</option>
+                                        <option value="Không Hoạt Động">Không Hoạt Động</option>
                                     </select>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
+                                <button type="submit" class="btn btn-primary">Thêm Mới</button>
                             </form>
                         </div>
                     </div>
                 </div>
             </div>
-        </c:forEach>
-        </tbody>
-    </table>
-</div>
+        </div>
 
-<!-- Modal thêm mới phương thức thanh toán -->
-<div class="modal fade" id="themMoiModal" tabindex="-1" aria-labelledby="themMoiLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="themMoiLabel">Thêm Mới Phương Thức Thanh Toán</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <!-- Form thêm mới phương thức thanh toán -->
-                <form action="/phuong-thuc-thanh-toan/add" method="post">
-                    <div class="mb-3">
-                        <label for="tenPhuongThuc" class="form-label">Tên Phương Thức</label>
-                        <input type="text" class="form-control" id="tenPhuongThuc" name="tenPhuongThuc" required>
+        <%--Form báo lỗi--%>
+        <div aria-live="polite" aria-atomic="true" class="position-relative">
+            <div class="toast-container position-fixed bottom-0 end-0 p-3">
+                <c:if test="${not empty successMessage}">
+                    <div class="toast align-items-center text-bg-success border-0" role="alert"
+                         aria-live="assertive"
+                         aria-atomic="true" data-bs-delay="5000">
+                        <div class="d-flex">
+                            <div class="toast-body">
+                                    ${successMessage}
+                            </div>
+                            <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast"
+                                    aria-label="Close"></button>
+                        </div>
                     </div>
-                    <div class="mb-3">
-                        <label for="trangThai" class="form-label">Trạng Thái</label>
-                        <select class="form-select" id="trangThai" name="trangThai" required>
-                            <option value="Hoạt Động">Hoạt Động</option>
-                            <option value="Không Hoạt Động">Không Hoạt Động</option>
-                        </select>
+                </c:if>
+                <c:if test="${not empty errorMessage}">
+                    <div class="toast align-items-center text-bg-danger border-0" role="alert" aria-live="assertive"
+                         aria-atomic="true" data-bs-delay="5000">
+                        <div class="d-flex">
+                            <div class="toast-body">
+                                    ${errorMessage}
+                            </div>
+                            <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast"
+                                    aria-label="Close"></button>
+                        </div>
                     </div>
-                    <button type="submit" class="btn btn-primary">Thêm Mới</button>
-                </form>
+                </c:if>
             </div>
         </div>
     </div>
 </div>
-
+</div>
+<%--Thông báo lỗi--%>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const toastElements = document.querySelectorAll('.toast');
+        toastElements.forEach(function (toastElement) {
+            const toast = new bootstrap.Toast(toastElement);
+            toast.show();
+        });
+    });
+</script>
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>

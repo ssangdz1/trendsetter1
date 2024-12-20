@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface HinhAnhRepository extends JpaRepository<HinhAnh,Integer> {
+    void deleteBySanPhamChiTietId(Integer idSanPhamChiTiet);
 }

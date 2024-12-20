@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface XuatSuRepository extends JpaRepository<XuatSu,Integer> {
+    boolean existsByQuocGia(String quocGia);
 }

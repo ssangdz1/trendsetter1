@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -26,5 +27,5 @@ public class DanhGia {
     private String nhanXet;
 
     @Column(name = "ngay_danh_gia")
-    private LocalDate ngayDanhGia = LocalDate.now();
+    private LocalDateTime ngayDanhGia;
 }

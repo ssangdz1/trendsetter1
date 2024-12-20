@@ -7,6 +7,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface KichThuocRepository extends JpaRepository<KichThuoc,Integer> {
-    void deleteAllBySanPhamChiTiet(SanPhamChiTiet sanPhamChiTiet);
-
+    boolean existsByTenKichThuoc(String tenKichThuoc);
 }

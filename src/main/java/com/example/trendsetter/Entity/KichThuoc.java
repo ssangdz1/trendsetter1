@@ -1,6 +1,8 @@
 package com.example.trendsetter.Entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,13 +19,9 @@ public class KichThuoc {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @NotBlank(message = "Tên kích thước không được để trống")
+    @Size(max = 100, message = "Tên kích thước không được vượt quá 100 ký tự")
     @Column(name = "ten_kich_thuoc")
     private String tenKichThuoc;
 
-    @Column(name = "trang_thai")
-    private String trangThai;
-
-    @ManyToOne
-    @JoinColumn(name = "id_san_pham_chi_tiet",referencedColumnName = "id")
-    private SanPhamChiTiet sanPhamChiTiet;
 }

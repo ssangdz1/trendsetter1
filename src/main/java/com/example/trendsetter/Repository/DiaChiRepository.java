@@ -1,6 +1,7 @@
 package com.example.trendsetter.Repository;
 
 import com.example.trendsetter.Entity.DiaChi;
+import com.example.trendsetter.Entity.KhachHang;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -21,4 +22,6 @@ public interface DiaChiRepository extends JpaRepository<DiaChi,Integer> {
         )FROM DiaChi dc
 """)
     public List<DiaChi> getAllBy();
+
+    List<DiaChi> findByKhachHangIdAndTrangThaiFalse(Integer khachHangId);  // Trang thái là 0
 }

@@ -1,22 +1,22 @@
+create database [TrendSetters]
+go
 USE [TrendSetters]
 GO
-/****** Object:  Table [dbo].[chat_lieu]    Script Date: 26/11/2024 12:34:43 PM ******/
+/****** Object:  Table [dbo].[chat_lieu]    Script Date: 02/12/2024 12:08:27 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[chat_lieu](
 	[id] [int] IDENTITY(1,1) NOT NULL,
-	[ten_chat_lieu] [nvarchar](255) NULL,
-	[mo_ta] [nvarchar](255) NULL,
-	[id_san_pham_chi_tiet] [int] NULL,
-PRIMARY KEY CLUSTERED 
+	[ten_chat_lieu] [nvarchar](50) NULL,
+ CONSTRAINT [PK_chat_lieu] PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[danh_gia]    Script Date: 26/11/2024 12:34:43 PM ******/
+/****** Object:  Table [dbo].[danh_gia]    Script Date: 02/12/2024 12:08:27 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -34,22 +34,21 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[danh_muc]    Script Date: 26/11/2024 12:34:43 PM ******/
+/****** Object:  Table [dbo].[danh_muc]    Script Date: 02/12/2024 12:08:27 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[danh_muc](
 	[id] [int] IDENTITY(1,1) NOT NULL,
-	[ten_danh_muc] [nvarchar](255) NULL,
-	[trang_thai] [nvarchar](50) NULL,
-PRIMARY KEY CLUSTERED 
+	[ten_danh_muc] [nvarchar](50) NULL,
+ CONSTRAINT [PK_danh_muc] PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[dia_chi]    Script Date: 26/11/2024 12:34:43 PM ******/
+/****** Object:  Table [dbo].[dia_chi]    Script Date: 02/12/2024 12:08:27 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -68,24 +67,22 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[hinh_anh]    Script Date: 26/11/2024 12:34:43 PM ******/
+/****** Object:  Table [dbo].[hinh_anh]    Script Date: 02/12/2024 12:08:27 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[hinh_anh](
 	[id] [int] IDENTITY(1,1) NOT NULL,
+	[url_hinh_anh] [varchar](50) NULL,
 	[id_san_pham_chi_tiet] [int] NULL,
-	[url_hinh_anh] [nvarchar](255) NULL,
-	[ngay_tao] [datetime] NULL,
-	[trang_thai] [nvarchar](50) NULL,
-PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_hinh_anh] PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[hoa_don]    Script Date: 26/11/2024 12:34:43 PM ******/
+/****** Object:  Table [dbo].[hoa_don]    Script Date: 02/12/2024 12:08:27 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -106,7 +103,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[hoa_don_chi_tiet]    Script Date: 26/11/2024 12:34:43 PM ******/
+/****** Object:  Table [dbo].[hoa_don_chi_tiet]    Script Date: 02/12/2024 12:08:27 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -127,7 +124,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[khach_hang]    Script Date: 26/11/2024 12:34:43 PM ******/
+/****** Object:  Table [dbo].[khach_hang]    Script Date: 02/12/2024 12:08:27 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -146,7 +143,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[khuyen_mai]    Script Date: 26/11/2024 12:34:43 PM ******/
+/****** Object:  Table [dbo].[khuyen_mai]    Script Date: 02/12/2024 12:08:27 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -166,23 +163,21 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[kich_thuoc]    Script Date: 26/11/2024 12:34:43 PM ******/
+/****** Object:  Table [dbo].[kich_thuoc]    Script Date: 02/12/2024 12:08:27 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[kich_thuoc](
 	[id] [int] IDENTITY(1,1) NOT NULL,
-	[ten_kich_thuoc] [nvarchar](255) NULL,
-	[trang_thai] [nvarchar](50) NULL,
-	[id_san_pham_chi_tiet] [int] NULL,
-PRIMARY KEY CLUSTERED 
+	[ten_kich_thuoc] [nvarchar](50) NULL,
+ CONSTRAINT [PK_kich_thuoc] PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[lich_su_thanh_toan]    Script Date: 26/11/2024 12:34:43 PM ******/
+/****** Object:  Table [dbo].[lich_su_thanh_toan]    Script Date: 02/12/2024 12:08:27 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -200,7 +195,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[ma_giam_gia]    Script Date: 26/11/2024 12:34:43 PM ******/
+/****** Object:  Table [dbo].[ma_giam_gia]    Script Date: 02/12/2024 12:08:27 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -220,23 +215,21 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[mau_sac]    Script Date: 26/11/2024 12:34:43 PM ******/
+/****** Object:  Table [dbo].[mau_sac]    Script Date: 02/12/2024 12:08:27 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[mau_sac](
 	[id] [int] IDENTITY(1,1) NOT NULL,
-	[ten_mau_sac] [nvarchar](255) NULL,
-	[trang_thai] [nvarchar](50) NULL,
-	[id_san_pham_chi_tiet] [int] NULL,
-PRIMARY KEY CLUSTERED 
+	[ten_mau_sac] [nvarchar](50) NULL,
+ CONSTRAINT [PK_mau_sac] PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[nhan_vien]    Script Date: 26/11/2024 12:34:43 PM ******/
+/****** Object:  Table [dbo].[nhan_vien]    Script Date: 02/12/2024 12:08:27 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -258,7 +251,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[phuong_thuc_thanh_toan]    Script Date: 26/11/2024 12:34:43 PM ******/
+/****** Object:  Table [dbo].[phuong_thuc_thanh_toan]    Script Date: 02/12/2024 12:08:27 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -275,25 +268,28 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[san_pham]    Script Date: 26/11/2024 12:34:43 PM ******/
+/****** Object:  Table [dbo].[san_pham]    Script Date: 02/12/2024 12:08:27 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[san_pham](
 	[id] [int] IDENTITY(1,1) NOT NULL,
-	[ten_san_pham] [nvarchar](255) NULL,
-	[ngay_tao] [datetime] NULL,
-	[ngay_sua] [datetime] NULL,
+	[ten_san_pham] [nvarchar](50) NULL,
+	[gia] [decimal](10, 2) NULL,
+	[mo_ta] [text] NULL,
+	[id_thuong_hieu] [int] NULL,
+	[id_xuat_su] [int] NULL,
 	[id_danh_muc] [int] NULL,
 	[trang_thai] [nvarchar](50) NULL,
-PRIMARY KEY CLUSTERED 
+	[so_luong] [int] NULL,
+ CONSTRAINT [PK_san_pham] PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[san_pham_chi_tiet]    Script Date: 26/11/2024 12:34:43 PM ******/
+/****** Object:  Table [dbo].[san_pham_chi_tiet]    Script Date: 02/12/2024 12:08:27 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -301,19 +297,18 @@ GO
 CREATE TABLE [dbo].[san_pham_chi_tiet](
 	[id] [int] IDENTITY(1,1) NOT NULL,
 	[id_san_pham] [int] NULL,
-	[id_thuong_hieu] [int] NULL,
-	[id_xuat_su] [int] NULL,
+	[id_mau_sac] [int] NULL,
+	[id_kich_thuoc] [int] NULL,
+	[id_chat_lieu] [int] NULL,
 	[so_luong] [int] NULL,
-	[gia_ban] [decimal](18, 2) NULL,
-	[ngay_tao] [datetime] NULL,
-	[ngay_sua] [datetime] NULL,
-PRIMARY KEY CLUSTERED 
+	[trang_thai] [nvarchar](50) NULL,
+ CONSTRAINT [PK_san_pham_chi_tiet] PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[thong_ke]    Script Date: 26/11/2024 12:34:43 PM ******/
+/****** Object:  Table [dbo].[thong_ke]    Script Date: 02/12/2024 12:08:27 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -331,31 +326,29 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[thuong_hieu]    Script Date: 26/11/2024 12:34:43 PM ******/
+/****** Object:  Table [dbo].[thuong_hieu]    Script Date: 02/12/2024 12:08:27 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[thuong_hieu](
 	[id] [int] IDENTITY(1,1) NOT NULL,
-	[ten_thuong_hieu] [nvarchar](255) NULL,
-	[trang_thai] [nvarchar](50) NULL,
-PRIMARY KEY CLUSTERED 
+	[ten_thuong_hieu] [nvarchar](50) NULL,
+ CONSTRAINT [PK_thuong_hieu] PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[xuat_su]    Script Date: 26/11/2024 12:34:43 PM ******/
+/****** Object:  Table [dbo].[xuat_su]    Script Date: 02/12/2024 12:08:27 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[xuat_su](
 	[id] [int] IDENTITY(1,1) NOT NULL,
-	[ten_xuat_su] [nvarchar](255) NULL,
-	[trang_thai] [nvarchar](50) NULL,
-PRIMARY KEY CLUSTERED 
+	[quoc_gia] [nvarchar](50) NULL,
+ CONSTRAINT [PK_xuat_su] PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
@@ -371,8 +364,10 @@ REFERENCES [dbo].[khach_hang] ([id])
 GO
 ALTER TABLE [dbo].[dia_chi] CHECK CONSTRAINT [FK_dia_chi_khach_hang]
 GO
-ALTER TABLE [dbo].[hinh_anh]  WITH CHECK ADD FOREIGN KEY([id_san_pham_chi_tiet])
+ALTER TABLE [dbo].[hinh_anh]  WITH CHECK ADD  CONSTRAINT [FK_hinh_anh_san_pham_chi_tiet1] FOREIGN KEY([id_san_pham_chi_tiet])
 REFERENCES [dbo].[san_pham_chi_tiet] ([id])
+GO
+ALTER TABLE [dbo].[hinh_anh] CHECK CONSTRAINT [FK_hinh_anh_san_pham_chi_tiet1]
 GO
 ALTER TABLE [dbo].[hoa_don]  WITH CHECK ADD FOREIGN KEY([id_khach_hang])
 REFERENCES [dbo].[khach_hang] ([id])
@@ -392,21 +387,46 @@ GO
 ALTER TABLE [dbo].[hoa_don_chi_tiet]  WITH CHECK ADD FOREIGN KEY([id_ma_giam_gia])
 REFERENCES [dbo].[ma_giam_gia] ([id])
 GO
-ALTER TABLE [dbo].[hoa_don_chi_tiet]  WITH CHECK ADD FOREIGN KEY([id_san_pham_chi_tiet])
+ALTER TABLE [dbo].[hoa_don_chi_tiet]  WITH CHECK ADD  CONSTRAINT [FK_hoa_don_chi_tiet_san_pham_chi_tiet] FOREIGN KEY([id_san_pham_chi_tiet])
 REFERENCES [dbo].[san_pham_chi_tiet] ([id])
+GO
+ALTER TABLE [dbo].[hoa_don_chi_tiet] CHECK CONSTRAINT [FK_hoa_don_chi_tiet_san_pham_chi_tiet]
 GO
 ALTER TABLE [dbo].[lich_su_thanh_toan]  WITH CHECK ADD FOREIGN KEY([id_hoa_don])
 REFERENCES [dbo].[hoa_don] ([id])
 GO
-ALTER TABLE [dbo].[san_pham]  WITH CHECK ADD FOREIGN KEY([id_danh_muc])
+ALTER TABLE [dbo].[san_pham]  WITH CHECK ADD  CONSTRAINT [FK_san_pham_danh_muc] FOREIGN KEY([id_danh_muc])
 REFERENCES [dbo].[danh_muc] ([id])
 GO
-ALTER TABLE [dbo].[san_pham_chi_tiet]  WITH CHECK ADD FOREIGN KEY([id_san_pham])
-REFERENCES [dbo].[san_pham] ([id])
+ALTER TABLE [dbo].[san_pham] CHECK CONSTRAINT [FK_san_pham_danh_muc]
 GO
-ALTER TABLE [dbo].[san_pham_chi_tiet]  WITH CHECK ADD FOREIGN KEY([id_thuong_hieu])
+ALTER TABLE [dbo].[san_pham]  WITH CHECK ADD  CONSTRAINT [FK_san_pham_thuong_hieu] FOREIGN KEY([id_thuong_hieu])
 REFERENCES [dbo].[thuong_hieu] ([id])
 GO
-ALTER TABLE [dbo].[san_pham_chi_tiet]  WITH CHECK ADD FOREIGN KEY([id_xuat_su])
+ALTER TABLE [dbo].[san_pham] CHECK CONSTRAINT [FK_san_pham_thuong_hieu]
+GO
+ALTER TABLE [dbo].[san_pham]  WITH CHECK ADD  CONSTRAINT [FK_san_pham_xuat_su] FOREIGN KEY([id_xuat_su])
 REFERENCES [dbo].[xuat_su] ([id])
+GO
+ALTER TABLE [dbo].[san_pham] CHECK CONSTRAINT [FK_san_pham_xuat_su]
+GO
+ALTER TABLE [dbo].[san_pham_chi_tiet]  WITH CHECK ADD  CONSTRAINT [FK_san_pham_chi_tiet_chat_lieu] FOREIGN KEY([id_chat_lieu])
+REFERENCES [dbo].[chat_lieu] ([id])
+GO
+ALTER TABLE [dbo].[san_pham_chi_tiet] CHECK CONSTRAINT [FK_san_pham_chi_tiet_chat_lieu]
+GO
+ALTER TABLE [dbo].[san_pham_chi_tiet]  WITH CHECK ADD  CONSTRAINT [FK_san_pham_chi_tiet_kich_thuoc] FOREIGN KEY([id_kich_thuoc])
+REFERENCES [dbo].[kich_thuoc] ([id])
+GO
+ALTER TABLE [dbo].[san_pham_chi_tiet] CHECK CONSTRAINT [FK_san_pham_chi_tiet_kich_thuoc]
+GO
+ALTER TABLE [dbo].[san_pham_chi_tiet]  WITH CHECK ADD  CONSTRAINT [FK_san_pham_chi_tiet_mau_sac] FOREIGN KEY([id_mau_sac])
+REFERENCES [dbo].[mau_sac] ([id])
+GO
+ALTER TABLE [dbo].[san_pham_chi_tiet] CHECK CONSTRAINT [FK_san_pham_chi_tiet_mau_sac]
+GO
+ALTER TABLE [dbo].[san_pham_chi_tiet]  WITH CHECK ADD  CONSTRAINT [FK_san_pham_chi_tiet_san_pham] FOREIGN KEY([id_san_pham])
+REFERENCES [dbo].[san_pham] ([id])
+GO
+ALTER TABLE [dbo].[san_pham_chi_tiet] CHECK CONSTRAINT [FK_san_pham_chi_tiet_san_pham]
 GO

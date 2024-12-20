@@ -7,6 +7,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface MauSacRepository extends JpaRepository<MauSac,Integer> {
-    void deleteAllBySanPhamChiTiet(SanPhamChiTiet sanPhamChiTiet);
-
+    boolean existsByTenMauSac(String tenMauSac);
 }

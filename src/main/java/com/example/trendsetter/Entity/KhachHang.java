@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @AllArgsConstructor
@@ -36,4 +37,8 @@ public class KhachHang {
 
     @Column(name = "trang_thai")
     private String trangThai;
+
+    @OneToMany(mappedBy = "khachHang", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<DiaChi> diaChis = new ArrayList<>();
+
 }

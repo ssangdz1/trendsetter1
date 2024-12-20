@@ -39,15 +39,6 @@ public class NhanVien {
     @Column(name = "chuc_vu")
     private String chucVu;
 
-    @Column(name = "ngay_sua")
-    private LocalDateTime ngaySua;
-
-    @Column(name = "ngay_tao")
-    private LocalDateTime ngayTao;
-
-    @Column(name = "hinh_anh")
-    private String hinhAnh;
-
     @Column(name = "trang_thai")
     private String trangThai;
 }

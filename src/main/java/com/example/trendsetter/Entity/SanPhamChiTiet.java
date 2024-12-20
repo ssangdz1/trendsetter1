@@ -6,8 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
 import java.util.List;
+
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -20,42 +20,32 @@ public class SanPhamChiTiet {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "gia_ban")
-    private Double giaBan;
-
-    @Column(name = "so_luong")
-    private Integer soLuong;
-
-    @Column(name = "ngay_tao")
-    private LocalDateTime ngayTao;
-
-    @Column(name = "ngay_sua")
-    private LocalDateTime ngaySua;
-
-    @Column(name = "trang_thai")
-    private String trangThai;
-
     @ManyToOne
     @JoinColumn(name = "id_san_pham",referencedColumnName = "id")
     private SanPham sanPham;
 
     @ManyToOne
-    @JoinColumn(name = "id_thuong_hieu",referencedColumnName = "id")
-    private ThuongHieu thuongHieu;
+    @JoinColumn(name = "id_mau_sac",referencedColumnName = "id")
+    private MauSac mauSac;
 
     @ManyToOne
-    @JoinColumn(name = "id_xuat_su",referencedColumnName = "id")
-    private XuatSu xuatSu;
+    @JoinColumn(name = "id_kich_thuoc",referencedColumnName = "id")
+    private KichThuoc kichThuoc;
 
-    @OneToMany(mappedBy = "sanPhamChiTiet")
+    @ManyToOne
+    @JoinColumn(name = "id_chat_lieu",referencedColumnName = "id")
+    private ChatLieu chatLieu;
+
+    @Column(name = "so_luong")
+    private Integer soLuong;
+
+    @Column(name = "trang_thai")
+    private String trangThai;
+
+    @Column(name = "gia")
+    private Double gia;
+
+    @OneToMany(mappedBy = "sanPhamChiTiet",cascade = CascadeType.ALL)
     private List<HinhAnh> hinhAnh;
 
-    @OneToMany(mappedBy = "sanPhamChiTiet")
-    private List<ChatLieu> chatLieu;
-
-    @OneToMany(mappedBy = "sanPhamChiTiet")
-    private List<MauSac> mauSac;
-
-    @OneToMany(mappedBy = "sanPhamChiTiet")
-    private List<KichThuoc> kichThuoc;
 }

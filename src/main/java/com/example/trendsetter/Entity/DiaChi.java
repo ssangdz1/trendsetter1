@@ -7,6 +7,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -31,7 +34,7 @@ public class DiaChi {
     private String thanhPho;
 
     @Column(name = "trang_thai")
-    private String trangThai;
+    private boolean trangThai;
 
     @ManyToOne
     @JoinColumn(name = "id_khach_hang",referencedColumnName = "id")
